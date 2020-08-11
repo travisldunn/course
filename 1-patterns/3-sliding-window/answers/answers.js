@@ -202,6 +202,9 @@ function minSubArrayLen(nums, sum) {
 // console.log(minSubArrayLen([3, 1, 7, 11, 2, 9, 8, 21, 63, 12, 21], 52)); // 1 [63]
 // console.log(minSubArrayLen([1, 4, 16, 22, 5, 7, 8, 9, 10], 92)); // 0 []
 
+// what is the max profit that you can make when buying
+// one day and selling on another day
+
 appleStocks = (stockPrices) => {
   let max = stockPrices[1] - stockPrices[0],
     current;
@@ -250,27 +253,4 @@ function minWindow(str1, str2) {
 
 // console.log(minWindow("ADOBECODEBANC", "BANC")); // 4
 
-// find the product of all other numbers in the array in O(n+n) time;
-
-let nums = [1, 7, 3, 4];
-
-productNums = (nums) => {
-  let products = [],
-    temp = 1;
-
-  for (let i = 0; i < nums.length; i++) {
-    products[i] = temp;
-    temp *= nums[i];
-  }
-
-  temp = 1;
-  for (let i = nums.length - 1; i >= 0; i--) {
-    products[i] *= temp;
-    temp *= nums[i];
-  }
-
-  return products;
-};
-
 console.log(productNums(nums)); // [84, 12, 28, 21]
-z;

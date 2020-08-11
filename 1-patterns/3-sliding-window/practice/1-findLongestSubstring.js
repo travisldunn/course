@@ -2,7 +2,19 @@
 // a string and returns the length of the longest substring with
 // all distinct characters.
 
-findLongestSubstring = (str) => {};
+findLongestSubstring = (str) => {
+  let found = {},
+    start = 0,
+    max = 0;
+
+  for (let i = 0; i < str.length; i++) {
+    if (found[str[i]]) start = Math.max(start, found[str[i]]);
+    max = Math.max(i - start + 1, max);
+    found[str[i]] = i + 1;
+  }
+
+  return max;
+};
 
 console.log(findLongestSubstring("")); // 0
 console.log(findLongestSubstring("rithmschool")); // 7

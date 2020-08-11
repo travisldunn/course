@@ -1,12 +1,16 @@
-appleStocks = (prices) => {
-  let max = -Infinity,
-    current;
+// what is the max profit that you can make when buying
+// one day and selling on another day
 
-  for (let i = 1; i < prices.length; i++) {
-    current = prices[i] - prices[i - 1];
-    if (current > current + max) max = current;
-    else max = Math.max(max, current + max);
+appleStocks = (prices) => {
+  let max = prices[1] - prices[0],
+    temp;
+
+  for (let i = 2; i < prices.length; i++) {
+    temp = prices[i] - prices[i - 1];
+    if (temp > temp + max) max = temp;
+    else max = Math.max(max, temp + max);
   }
+
   return max;
 };
 

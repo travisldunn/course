@@ -2,23 +2,7 @@
 // subarray of which the sum is greater than or equal to the
 // integer passed to the function. If there isn't one, return 0 instead.
 
-function minSubArrayLen(nums, sum) {
-  let min = Infinity,
-    l = 0,
-    r = 0,
-    total = 0;
-  while (l < nums.length) {
-    if (total < sum && r < nums.length) {
-      total += nums[r];
-      r++;
-    } else if (total >= sum) {
-      min = Math.min(min, r - l);
-      total -= nums[l];
-      l++;
-    } else break;
-  }
-  return min === Infinity ? 0 : min;
-}
+function minSubArrayLen(nums, sum) {}
 
 console.log(minSubArrayLen([2, 3, 1, 2, 4, 3], 7)); // 2 because [4,3]
 console.log(minSubArrayLen([2, 1, 6, 5, 4], 9)); // 2 [5,4]

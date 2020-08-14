@@ -205,52 +205,111 @@ function minSubArrayLen(nums, sum) {
 // what is the max profit that you can make when buying
 // one day and selling on another day
 
-appleStocks = (stockPrices) => {
-  let max = stockPrices[1] - stockPrices[0],
-    current;
-
-  for (let i = 2; i < stockPrices.length; i++) {
-    current = stockPrices[i] - stockPrices[i - 1];
-    if (current > current + max) max = current;
-    else max = Math.max(max, current + max);
-  }
-  return max;
-};
-
-appleStocks = (prices) => {
-  let max = -Infinity,
-    current;
+function appleStocks(prices) {
+  let min = prices[0],
+    max = prices[1] - prices[0],
+    temp;
 
   for (let i = 1; i < prices.length; i++) {
-    current = prices[i] - prices[i - 1];
-    if (current > max + current) max = current;
-    else max = Math.max(max, max + current);
+    temp = prices[i] - min;
+    max = Math.max(max, temp);
+    min = Math.min(min, prices[i]);
   }
+
+  return max;
+}
+
+function appleStocks(p) {
+  let min = p[0],
+    max = p[1] - p[0];
+  for (let n of p.slice(1)) {
+    max = Math.max(max, n - min);
+    min = Math.min(min, n);
+  }
+  return max;
+}
+
+function appleStocks(p) {
+  let min = p[0],
+    max = p[1] - p[0];
+  for (let i = 1; i < p.length; i++) {
+    max = Math.max(max, p[i] - min);
+    min = Math.min(min, p[i]);
+  }
+  return max;
+}
+
+// console.log(appleStocks([10, 4, 7, 5, 8, 11, 9, 100])); // 96
+
+// Given a string s that consists of only uppercase
+// English letters, you can perform at most k operations on that string.
+// In one operation, you can choose any character of the
+// string and change it to any other uppercase English character.
+// Find the length of the longest sub - string containing all
+// repeating letters you can get after performing the above operations.
+
+const characterReplacement = (s, k) => {
+  let start = 0,
+    mostFreq = 0,
+    chars = {},
+    max = 0;
+
+  for (let i = 0; i < s.length; i++) {
+    chars[s[i]] = ++chars[s[i]] || 1;
+    mostFreq = Math.max(mostFreq, chars[s[i]]);
+    while (i - start + 1 - mostFreq > k) {
+      chars[s[start]]--;
+      start++;
+    }
+    max = Math.max(max, i - start + 1);
+  }
+
   return max;
 };
 
-const stockPrices = [10, 7, 5, 8, 11, 9];
+// console.log(characterReplacement("KLAABABBAXCSF", 2)); // 5
+// console.log(characterReplacement("ABAB", 2)); // 4
 
-console.log(appleStocks(stockPrices));
+// Find the minimum window in str1 which will contain all the
+// characters in str2 in complexity O(n).
 
-// Returns 6 (buying for $5 and selling for $11)
+var minWindow = function (s, t) {
+  const charCount = {};
+  for (const char of t) {
+    charCount[char] ? charCount[char]++ : (charCount[char] = 1);
+  }
 
-// ----> Given a string s that consists of only uppercase English letters, you can perform at most k operations on that string.
-// ----> In one operation, you can choose any character of the string and change it to any other uppercase English character.
-// ----> Find the length of the longest sub - string containing all repeating letters you can get after performing the above operations.
+  const numUniqueChars = Object.keys(charCount).length;
+  let window = [-1, -1];
+  let matches = 0;
+  let minWindowLength = Infinity;
+  let start = 0;
+  for (let end = 0; end < s.length; end++) {
+    let rightChar = s[end];
+    if (rightChar in charCount) {
+      charCount[rightChar]--;
+      if (charCount[rightChar] === 0) {
+        matches++;
+      }
+    }
+    while (matches === numUniqueChars) {
+      if (end - start + 1 < minWindowLength) {
+        minWindowLength = end - start + 1;
+        window[0] = start;
+        window[1] = end;
+      }
 
-function longestRepeatChar() {}
+      const leftChar = s[start];
+      if (leftChar in charCount) {
+        if (charCount[leftChar] === 0) {
+          matches--;
+        }
+        charCount[leftChar]++;
+      }
+      start++;
+    }
+  }
 
-// console.log(longestRepeatChar("ABAB", 2)); // 4
-// console.log(longestRepeatChar("AABABBA", 1)); // 4
-
-// ----> Find the minimum window in str1 which will contain all the characters in str2 in complexity O(n).
-
-function minWindow(str1, str2) {
-  let min = 0,
-    found;
-}
-
-// console.log(minWindow("ADOBECODEBANC", "BANC")); // 4
-
-console.log(productNums(nums)); // [84, 12, 28, 21]
+  const [windowStart, windowEnd] = window;
+  return start === -1 ? "" : s.substring(windowStart, windowEnd + 1);
+};

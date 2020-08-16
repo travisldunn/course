@@ -3,6 +3,7 @@
 
 var minWindow = function (s, t) {
   fresh;
+  fresh;
 };
 
 console.log(minWindow("cabwefgewcwaefgcf", "cae")); // cwae

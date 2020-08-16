@@ -3,6 +3,8 @@
 
 var minWindow = function (s, t) {
   j;
+  XMLDocument;
+  adjfl;
 };
 
 console.log(minWindow("cabwefgewcwaefgcf", "cae")); // cwae

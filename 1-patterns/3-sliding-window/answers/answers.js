@@ -270,46 +270,39 @@ const characterReplacement = (s, k) => {
 // console.log(characterReplacement("KLAABABBAXCSF", 2)); // 5
 // console.log(characterReplacement("ABAB", 2)); // 4
 
-// Find the minimum window in str1 which will contain all the
-// characters in str2 in complexity O(n).
+// Find the minimum window in str1 which will contain
+// all the characters in str2 in complexity O(n).
 
 var minWindow = function (s, t) {
-  const charCount = {};
-  for (const char of t) {
-    charCount[char] ? charCount[char]++ : (charCount[char] = 1);
-  }
+  const chars = {};
+  for (let c of t) chars[c] = ++chars[c] || 1;
+  const numChars = Object.keys(chars).length;
 
-  const numUniqueChars = Object.keys(charCount).length;
-  let window = [-1, -1];
-  let matches = 0;
-  let minWindowLength = Infinity;
-  let start = 0;
-  for (let end = 0; end < s.length; end++) {
-    let rightChar = s[end];
-    if (rightChar in charCount) {
-      charCount[rightChar]--;
-      if (charCount[rightChar] === 0) {
-        matches++;
-      }
+  let matches = 0,
+    minWindow = Infinity,
+    minWindowStart = 0,
+    l = 0;
+
+  for (let r = 0; r < s.length; r++) {
+    if (s[r] in chars) {
+      chars[s[r]]--;
+      if (chars[s[r]] === 0) matches++;
     }
-    while (matches === numUniqueChars) {
-      if (end - start + 1 < minWindowLength) {
-        minWindowLength = end - start + 1;
-        window[0] = start;
-        window[1] = end;
+    while (matches === numChars) {
+      if (r - l + 1 < minWindow) {
+        minWindow = r - l + 1;
+        minWindowStart = l;
       }
-
-      const leftChar = s[start];
-      if (leftChar in charCount) {
-        if (charCount[leftChar] === 0) {
-          matches--;
-        }
-        charCount[leftChar]++;
+      if (s[l] in chars) {
+        if (chars[s[l]] === 0) matches--;
+        chars[s[l]]++;
       }
-      start++;
+      l++;
     }
   }
-
-  const [windowStart, windowEnd] = window;
-  return start === -1 ? "" : s.substring(windowStart, windowEnd + 1);
+  return minWindow === Infinity ? "" : s.substr(minWindowStart, minWindow);
 };
+
+// console.log(minWindow("cabwefgewcwaefgcf", "cae")); // cwae
+// console.log(minWindow("ZZZZZZADOBECBODEANCZZZZZZZ", "BANC")); // CBODEAN
+// console.log(minWindow("ADOBECODEBANC", "ABC")); // BANC

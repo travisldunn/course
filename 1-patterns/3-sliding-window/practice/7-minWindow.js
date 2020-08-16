@@ -2,9 +2,7 @@
 // all the characters in str2 in complexity O(n).
 
 var minWindow = function (s, t) {
-  j;
-  XMLDocument;
-  adjfl;
+  fresh;
 };
 
 console.log(minWindow("cabwefgewcwaefgcf", "cae")); // cwae

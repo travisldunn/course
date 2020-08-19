@@ -21,21 +21,7 @@
  *
  */
 
-function greaterValues(arr, target) {
-  let mid,
-    l = 0,
-    r = arr.length;
-
-  while (l <= r) {
-    mid = Math.floor((l + r) / 2);
-    if (arr[mid] <= target && arr[mid + 1] >= target)
-      return arr.length - mid - 1;
-    if (arr[mid] < target) l = mid + 1;
-    else r = mid - 1;
-  }
-
-  return 0;
-}
+function greaterValues(arr, target) {}
 
 console.log(greaterValues([1, 2, 3, 5, 5, 7, 9, 10, 11], 5));
 console.log(greaterValues([1, 2, 3], 4));

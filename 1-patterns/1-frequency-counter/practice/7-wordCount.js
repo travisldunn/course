@@ -1,10 +1,6 @@
-/**
- * Given an body of text, return a hash table of the frequency of each word.
- *
- * Capital and lower case versions of the same word should be counted as the same word.
- *
- * Remove punctuations from all words.
- */
+// Given an body of text, return a hash table of the frequency of each word.
+// Capital and lower case versions of the same word should be
+// counted as the same word. Remove punctuations from all words.
 
 function wordCount(sentence) {}
 

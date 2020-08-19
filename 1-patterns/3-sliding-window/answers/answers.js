@@ -178,23 +178,17 @@ function minSubArrayLen(nums, sum) {
 
 function minSubArrayLen(nums, sum) {
   let min = Infinity,
-    count = 0,
-    start = 0;
+    count = 0;
 
-  for (let i = 0; i < nums.length; i++) {
-    count += nums[i];
-    if (count >= sum) {
-      while (count >= sum) {
-        count -= nums[start];
-        start++;
-      }
-      start--;
-      count += nums[start];
-      min = Math.min(min, i - start + 1);
+  for (let l = 0, r = 0; r < nums.length; r++) {
+    count += nums[r];
+    while (count >= sum) {
+      min = Math.min(min, r - l + 1);
+      count -= nums[l];
+      l++;
     }
   }
-  if (min === Infinity) return 0;
-  return min;
+  return min === Infinity ? 0 : min;
 }
 
 // console.log(minSubArrayLen([2, 3, 1, 2, 4, 3], 7)); // 2 because [4,3]

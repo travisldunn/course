@@ -8,6 +8,6 @@
 
 const letterSort = (s) => {};
 
-console.log(letterSort("helaloz")); //  ehllo
+console.log(letterSort("helaloz")); //  aehlloz
 console.log(letterSort("whiteboard")); // abdehiortw
 console.log(letterSort("one")); // eno

@@ -158,6 +158,17 @@ function isAnagram(str1, str2) {
   return true;
 }
 
+function isAnagram(str1, str2) {
+  if (str1.length !== str2.length) return false;
+  let chars = {};
+  for (let c of str1) chars[c] = ++chars[c] || 1;
+  for (let c of str2) {
+    if (!chars[c]) return false;
+    --chars[c];
+  }
+  return true;
+}
+
 // console.log(isAnagram("ttttratvis", "stivart")); // false
 // console.log(isAnagram("travisz", "sivartt")); // false
 // console.log(isAnagram("dog", "god")); // true

@@ -1,10 +1,7 @@
 // Find the minimum window in str1 which will contain
 // all the characters in str2 in complexity O(n).
 
-var minWindow = function (s, t) {
-  fresh;
-  fresh;
-};
+var minWindow = function (s, t) {};
 
 console.log(minWindow("cabwefgewcwaefgcf", "cae")); // cwae
 console.log(minWindow("ZZZZZZADOBECBODEANCZZZZZZZ", "BANC")); // CBODEAN

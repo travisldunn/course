@@ -1,10 +1,8 @@
-/**
- * Given a string, find the most frequent occurring letter(s) in the string
- *
- * Constraints
- * If more than one letter is tied for the most frequent, return a string of all
- * the letters in one string.
- */
+//  Given a string, find the most frequent occurring letter(s) in the string
+
+//  Constraints
+//  If more than one letter is tied for the most frequent, return a string of all
+//  the letters in one string.
 
 function characterMode(string) {}
 

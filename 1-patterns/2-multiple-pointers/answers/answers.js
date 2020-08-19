@@ -174,8 +174,7 @@ function findPivot(ary) {
     }
   }
 
-  if (lsum === rsum) return l;
-  else return -1;
+  return nlsum === rsum ? l : -1;
 }
 
 console.log(findPivot([1, 2, 1, 6, 3, 1])); // 3

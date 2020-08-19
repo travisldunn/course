@@ -1,13 +1,6 @@
-/**
- * Given a string of characters where each character is either 'r', 'g', or 'b',
- * determine the number of complete sets of 'rgb' that can be made with the
- * characters.
- *
- * Constraints
- * Time: O(N)
- * Space: O(1)
-
- */
+//  Given a string of characters where each character is either 'r', 'g', or 'b',
+//  determine the number of complete sets of 'rgb' that can be made with the
+//  characters.
 
 function rgb(string) {}
 

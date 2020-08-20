@@ -69,43 +69,25 @@ class Piece {
     this.westMatch = false;
     this.requiredMatches = 0;
 
-    if (this.northID !== null) {
-      this.requiredMatches++;
-    }
-    if (this.southID !== null) {
-      this.requiredMatches++;
-    }
-    if (this.eastID !== null) {
-      this.requiredMatches++;
-    }
-    if (this.westID !== null) {
-      this.requiredMatches++;
-    }
+    if (this.northID !== null) this.requiredMatches++;
+    if (this.southID !== null) this.requiredMatches++;
+    if (this.eastID !== null) this.requiredMatches++;
+    if (this.westID !== null) this.requiredMatches++;
   }
 
   verifyID(direction, checkID) {
     if (this[`${direction} ID`] === checkID) {
       this[`${direction} Match`] = true;
       return true;
-    } else {
-      return false;
-    }
+    } else return false;
   }
 
   pieceComplete() {
     let matches = 0;
-    if (northMatch) {
-      matches++;
-    }
-    if (southMatch) {
-      matches++;
-    }
-    if (eastMatch) {
-      matches++;
-    }
-    if (westMatch) {
-      matches++;
-    }
+    if (northMatch) matches++;
+    if (southMatch) matches++;
+    if (eastMatch) matches++;
+    if (westMatch) matches++;
     return matches === this.requiredMatches;
   }
 }
@@ -137,9 +119,7 @@ class Jigsaw {
       left.eastMatch = true;
       right.westMatch = true;
       return true;
-    } else {
-      return false;
-    }
+    } else return false;
   }
 
   verifyVertical(above, below) {
@@ -151,8 +131,6 @@ class Jigsaw {
       above.southMatch = true;
       below.northMatch = true;
       return true;
-    } else {
-      return false;
-    }
+    } else return false;
   }
 }

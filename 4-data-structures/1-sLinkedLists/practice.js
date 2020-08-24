@@ -1,6 +1,6 @@
 class Node {
   constructor(val) {
-    this.value = val;
+    this.val = val;
     this.next = null;
   }
 }
@@ -27,15 +27,27 @@ class SLL {
 
   pop() {
     if (!this.head) return undefined;
-    let current = this.head;
-    let newTail = current;
-    while (current.next) {
-      newTail = current;
-      current = current.next;
+    let node = this.head,
+      prev = node;
+    while (node.next) {
+      prev = node;
+      node = node.next;
     }
-    this.tail = newTail;
-    this.tail.next = null;
-    --this.length;
+    prev.next = null;
+    this.tail = prev;
+    this.length--;
+    if (!this.length) {
+      this.head = null;
+      this.tail = null;
+    }
+    return node;
+  }
+
+  shift() {
+    if (!this.head) return undefined;
+    let current = this.head;
+    this.head = this.head.next;
+    this.length--;
     if (!this.length) {
       this.head = null;
       this.tail = null;
@@ -43,18 +55,9 @@ class SLL {
     return current;
   }
 
-  shift() {
-    if (!this.head) return undefined;
-    let current = this.head;
-    this.head = current.next;
-    this.length--;
-    if (!this.length) this.tail = null;
-    return current;
-  }
-
   unshift(val) {
     if (!this.head) return this.push(val);
-    let node = new Node(val);
+    const node = new Node(val);
     node.next = this.head;
     this.head = node;
     this.length++;
@@ -62,48 +65,49 @@ class SLL {
   }
 
   get(idx) {
-    if (idx < 0 || idx > this.length) return undefined;
-    let count = idx;
+    if (idx > this.length || !this.length) return undefined;
+    if (idx === this.length) return this.tail;
     let current = this.head;
-    while (count) {
-      count--;
-      current = current.next;
-    }
+    while (idx--) current = current.next;
     return current;
   }
 
   set(idx, val) {
-    let node = this.get(idx);
-    if (node) {
-      node.value = val;
-      return true;
-    }
-    return false;
+    const node = this.get(idx);
+    if (node) node.val = val;
+    return node ? true : false;
   }
 
   insert(idx, val) {
     if (idx < 0 || idx > this.length) return false;
-    if (!this.head || idx === this.length) return !!this.push(val);
+    if (idx === this.length) return !!this.push(val);
     if (idx === 0) return !!this.unshift(val);
-
     let node = new Node(val);
-    let before = this.get(idx - 1);
-    node.next = before.next;
-    before.next = node;
+    let prev = this.get(idx - 1);
+    node.next = prev.next;
+    prev.next = node;
     this.length++;
     return true;
   }
 
   remove(idx) {
     if (idx < 0 || idx > this.length) return false;
-    if (!this.head || idx === this.length) return !!this.pop(val);
-    if (idx === 0) return !!this.shift(val);
-
-    let before = this.get(idx - 1);
-    before.next = before.next.next;
+    if (idx === this.length) return this.pop();
+    if (idx === 0) return this.shift();
+    let prev = this.get(idx - 1),
+      removed = prev.next;
+    prev.next = prev.next.next;
     this.length--;
-    return true;
+    return removed;
   }
+
+  reverse() {
+    if (!this.head) return undefined;
+    let current = this.head(),
+      prev;
+  }
+
+  print() {}
 }
 
 const list = new SLL();
@@ -111,29 +115,9 @@ list.push("travis");
 list.push("dio");
 list.push("bowie");
 
-// console.log(list.pop());
-// console.log(list.shift());
 // console.log(list.unshift("taco"));
-// console.log(list.get(0));
-// console.log(list.get(1));
-// console.log(list.get(2));
-// console.log(list.insert(1, "dick"));
-// list.set(1, "fuck");
-// console.log(list.remove(1));
-// list.reverse();
-
-reverse = (current) => {
-  let previous, temp;
-  while (current) {
-    temp = current.next;
-    current.next = previous;
-    previous = current;
-    current = temp;
-  }
-  return previous;
-};
-
-console.log(reverse(list.head));
+console.log(list.remove(3));
+console.log(list);
 
 // push
 // pop

@@ -119,7 +119,6 @@ class Board {
     this.storage.forEach((line, row) => {
       process.stdout.write(`${row}`);
       line.forEach((square) => {
-        console.log(square, "--->");
         process.stdout.write(`|${square}`);
       });
       process.stdout.write("|");
@@ -129,7 +128,6 @@ class Board {
     process.stdout.write("\n");
   }
 }
-adfadsfasdfaf;
 
 const tictactoe = new Game();
 

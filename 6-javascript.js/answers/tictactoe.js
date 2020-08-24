@@ -281,5 +281,5 @@ class Board {
 
 // Uncomment to run game:
 
-// let game = new TicTacToe();
-// game.runGame();
+let game = new TicTacToe();
+game.runGame();

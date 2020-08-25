@@ -64,6 +64,17 @@ class SLL {
     return this;
   }
 
+  search(val) {
+    let current = this.head,
+      idx = 0;
+    while (current) {
+      if (current.val === val) return idx;
+      idx++;
+      current = current.next;
+    }
+    return -1;
+  }
+
   get(idx) {
     if (idx > this.length || !this.length) return undefined;
     if (idx === this.length) return this.tail;
@@ -119,7 +130,15 @@ class SLL {
     })(this.head);
   }
 
-  swap(val1, val2) {}
+  swap(a, b) {
+    if (!this.head || a === b) return head;
+    const aprev = this.get(this.search(a) - 1),
+      bprev = this.get(this.search(b) - 1);
+    let tmp = aprev.next.val;
+    aprev.next.val = bprev.next.val;
+    bprev.next.val = tmp;
+    return this;
+  }
 
   fromLast(n) {
     let slow = this.head,
@@ -147,20 +166,34 @@ class SLL {
   midpoint() {
     let slow = this.head;
     let fast = this.head;
-    while (fast.next.next) {
+    while (fast.next && fast.next.next) {
       slow = slow.next;
       fast = fast.next.next;
     }
     return slow;
   }
+
+  randomNodeVal() {
+    let count = 0,
+      result,
+      current = this.head;
+
+    while (current) {
+      count++;
+      if (Math.random() < 1 / count) result = current.val;
+      current = current.next;
+    }
+
+    return result;
+  }
 }
 
 const list = new SLL();
-list.push("travis");
-list.push("dio");
-list.push("bowie");
+list.push("5");
+list.push("27");
+list.push("6");
 
-console.log(list.fromLast(1));
+console.log(list.swap("27", "6"));
 
 // Methods
 
@@ -168,6 +201,7 @@ console.log(list.fromLast(1));
 // pop
 // shift
 // unshift
+// search
 // get
 // set
 // insert
@@ -177,3 +211,6 @@ console.log(list.fromLast(1));
 // printBackwards
 // swap
 // fromLast
+// isCircular
+// midpoint
+// randomNodeValue

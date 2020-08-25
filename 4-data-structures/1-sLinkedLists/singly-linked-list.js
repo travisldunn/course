@@ -64,6 +64,17 @@ class SLL {
     return this;
   }
 
+  search(val) {
+    let current = this.head,
+      idx = 0;
+    while (current) {
+      if (current.val === val) return idx;
+      idx++;
+      current = current.next;
+    }
+    return -1;
+  }
+
   get(idx) {
     if (idx > this.length || !this.length) return undefined;
     if (idx === this.length) return this.tail;
@@ -101,54 +112,103 @@ class SLL {
     return removed;
   }
 
-  reverse() {
-    var node = this.head;
-    this.head = this.tail;
-    this.tail = node;
-    var next;
-    var prev = null;
-    for (var i = 0; i < this.length; i++) {
-      next = node.next;
-      node.next = prev;
-      prev = node;
-      node = next;
-    }
-    return this;
-  }
-  reverse(head) {
-    let node = head,
-      previous,
-      tmp;
+  reverse() {}
 
-    while (node) {
-      // save next before we overwrite node.next!
-      tmp = node.next;
-
-      // reverse pointer
-      node.next = previous;
-
-      // step forward in the list
-      previous = node;
-      node = tmp;
-    }
-
-    return previous;
-  }
   print() {
-    var arr = [];
-    var current = this.head;
+    let current = this.head;
     while (current) {
-      arr.push(current.val);
+      console.log(current.val);
       current = current.next;
     }
-    console.log(arr);
+  }
+
+  printBackwards() {
+    (function recurse(node) {
+      if (!node) return;
+      recurse(node.next);
+      console.log(node.val);
+    })(this.head);
+  }
+
+  swap(a, b) {
+    if (!this.head || a === b) return head;
+    const aprev = this.get(this.search(a) - 1),
+      bprev = this.get(this.search(b) - 1);
+    let tmp = aprev.next.val;
+    aprev.next.val = bprev.next.val;
+    bprev.next.val = tmp;
+    return this;
+  }
+
+  fromLast(n) {
+    let slow = this.head,
+      fast = this.head;
+    while (n--) fast = fast.next;
+    while (fast.next) {
+      slow = slow.next;
+      fast = fast.next;
+    }
+    return slow;
+  }
+
+  isCircular() {
+    let slow = this.head;
+    let fast = this.head;
+
+    while (fast.next && fast.next.next) {
+      slow = slow.next;
+      fast = fast.next.next;
+      if (slow === fast) return true;
+    }
+    return false;
+  }
+
+  midpoint() {
+    let slow = this.head;
+    let fast = this.head;
+    while (fast.next && fast.next.next) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+    return slow;
+  }
+
+  randomNodeVal() {
+    let count = 0,
+      result,
+      current = this.head;
+
+    while (current) {
+      count++;
+      if (Math.random() < 1 / count) result = current.val;
+      current = current.next;
+    }
+
+    return result;
   }
 }
 
-var list = new SinglyLinkedList();
+const list = new SLL();
+list.push("5");
+list.push("27");
+list.push("6");
 
-list.push(100);
-list.push(201);
-list.push(250);
-list.push(350);
-list.push(999);
+// Methods
+
+// push
+// pop
+// shift
+// unshift
+// search
+// get
+// set
+// insert
+// remove
+// reverse
+// print
+// printBackwards
+// swap
+// fromLast
+// isCircular
+// midpoint
+// randomNodeValue

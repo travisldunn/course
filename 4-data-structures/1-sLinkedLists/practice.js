@@ -147,7 +147,7 @@ class SLL {
   midpoint() {
     let slow = this.head;
     let fast = this.head;
-    while (fast.next && fast.next.next) {
+    while (fast.next.next) {
       slow = slow.next;
       fast = fast.next.next;
     }

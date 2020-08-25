@@ -101,13 +101,48 @@ class SLL {
     return removed;
   }
 
-  reverse() {
-    if (!this.head) return undefined;
-    let current = this.head(),
-      prev;
+  reverse() {}
+
+  print() {
+    let current = this.head;
+    while (current) {
+      console.log(current.val);
+      current = current.next;
+    }
   }
 
-  print() {}
+  printBackwards() {
+    (function recurse(node) {
+      if (!node) return;
+      recurse(node.next);
+      console.log(node.val);
+    })(this.head);
+  }
+
+  swap(val1, val2) {}
+
+  fromLast(n) {
+    let slow = this.head,
+      fast = this.head;
+    while (n--) fast = fast.next;
+    while (fast.next) {
+      slow = slow.next;
+      fast = fast.next;
+    }
+    return slow;
+  }
+
+  isCircular() {
+    let slow = this.head;
+    let fast = this.head;
+
+    while (fast.next && fast.next.next) {
+      slow = slow.next;
+      fast = fast.next.next;
+      if (slow === fast) return true;
+    }
+    return false;
+  }
 }
 
 const list = new SLL();
@@ -115,9 +150,9 @@ list.push("travis");
 list.push("dio");
 list.push("bowie");
 
-// console.log(list.unshift("taco"));
-console.log(list.remove(3));
-console.log(list);
+console.log(list.fromLast(1));
+
+// Methods
 
 // push
 // pop
@@ -129,3 +164,6 @@ console.log(list);
 // remove
 // reverse
 // print
+// printBackwards
+// swap
+// fromLast

@@ -193,8 +193,6 @@ list.push("5");
 list.push("27");
 list.push("6");
 
-console.log(list.swap("27", "6"));
-
 // Methods
 
 // push

@@ -99,9 +99,38 @@ class DLL {
     return true;
   }
 
-  insert(i, val) {}
+  insert(i, val) {
+    if (i < 0 || i > this.length) return undefined;
+    if (i === 0) return !!this.unshift();
+    if (i === this.length) return !!this.push();
 
-  remove(i) {}
+    const node = new Node(val),
+      prev = this.get(i - 1),
+      next = prev.next;
+
+    prev.next = node;
+    node.prev = prev;
+    node.next = next;
+    next.prev = node;
+
+    this.length++;
+    return true;
+  }
+
+  remove(i) {
+    if (i < 0 || i > this.length) return undefined;
+    if (i === 0) return this.shift();
+    if (i === this.length) return this.pop();
+
+    const remove = this.get(i);
+    remove.prev.next = remove.next;
+    remove.next.prev = remove.prev;
+    remove.prev = null;
+    remove.next = null;
+    this.length--;
+
+    return remove;
+  }
 
   reverse() {}
 }

@@ -67,6 +67,7 @@ class DLL {
       node.next = this.head;
       this.head = node;
     }
+    this.length++;
     return this;
   }
 

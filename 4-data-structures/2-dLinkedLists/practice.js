@@ -132,7 +132,22 @@ class DLL {
     return remove;
   }
 
-  reverse() {}
+  reverse() {
+    let current = this.tail,
+      tmp = null;
+    while (current) {
+      current.next = current.prev;
+      current.prev = temp;
+      temp = current;
+      current = current.next;
+    }
+    temp = this.head;
+    this.head = this.tail;
+    this.tail = temp;
+    this.tail.next = null;
+    this.head.prev = null;
+    return this;
+  }
 }
 
 let dub = new DLL();
@@ -145,5 +160,3 @@ dub.push("fun");
 dub.push("stuff");
 dub.push("buds");
 dub.push("dudes");
-
-console.log(dub.set(1, "alkdjk"));

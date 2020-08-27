@@ -11,7 +11,7 @@ class Stack {
     this.last = null;
     this.size = 0;
   }
-  // unshift
+
   push(val) {
     let node = new Node(val);
     if (!this.first) {
@@ -25,7 +25,6 @@ class Stack {
     return ++this.size;
   }
 
-  // shift
   pop() {
     if (!this.first) return null;
     let temp = this.first;

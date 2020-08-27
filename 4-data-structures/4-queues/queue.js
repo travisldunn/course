@@ -12,7 +12,6 @@ class Queue {
     this.size = 0;
   }
 
-  // push
   enqueue(val) {
     let node = new Node(val);
     if (!this.first) {
@@ -25,7 +24,6 @@ class Queue {
     return ++this.size;
   }
 
-  // shift
   dequeue() {
     if (!this.first) return null;
     let temp = this.first;

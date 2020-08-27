@@ -1,11 +1,31 @@
 class Node {
-  constructor(val) {}
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+    this.prev = null;
+  }
 }
 
 class DLL {
-  constructor() {}
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
 
-  push(val) {}
+  push(val) {
+    const node = new Node(val);
+    if (!this.head) {
+      this.head = node;
+      this.tail = node;
+    } else {
+      node.prev = this.tail;
+      this.tail.next = node;
+      this.tail = node;
+    }
+    this.length++;
+    return this;
+  }
 
   pop() {}
 
@@ -34,3 +54,5 @@ dub.push("fun");
 dub.push("stuff");
 dub.push("buds");
 dub.push("dudes");
+
+console.log(dub);

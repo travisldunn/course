@@ -76,8 +76,8 @@ class SLL {
   }
 
   get(idx) {
-    if (idx > this.length || !this.length) return undefined;
-    if (idx === this.length) return this.tail;
+    if (idx < 0 || idx > this.length - 1) return undefined;
+    if (idx === this.length - 1) return this.tail;
     let current = this.head;
     while (idx--) current = current.next;
     return current;
@@ -86,7 +86,7 @@ class SLL {
   set(idx, val) {
     const node = this.get(idx);
     if (node) node.val = val;
-    return node ? true : false;
+    return !!node;
   }
 
   insert(idx, val) {
@@ -112,7 +112,24 @@ class SLL {
     return removed;
   }
 
-  reverse() {}
+  reverse() {
+    if (!this.head) return undefined;
+    let current = this.head,
+      prev = null,
+      temp;
+    while (current) {
+      temp = current.next;
+      current.next = prev;
+      prev = current;
+      current = temp;
+    }
+    temp = this.head;
+    temp.next = null;
+    this.head = this.tail;
+    this.tail = temp;
+
+    return this;
+  }
 
   print() {
     let current = this.head;
@@ -130,14 +147,18 @@ class SLL {
     })(this.head);
   }
 
-  swap(a, b) {
+  swapValues(a, b) {
     if (!this.head || a === b) return head;
-    const aprev = this.get(this.search(a) - 1),
-      bprev = this.get(this.search(b) - 1);
-    let tmp = aprev.next.val;
-    aprev.next.val = bprev.next.val;
-    bprev.next.val = tmp;
-    return this;
+    const aN = this.get(this.search(a));
+    const bN = this.get(this.search(b));
+
+    if (aN && bN) {
+      let temp = aN.val;
+      aN.val = bN.val;
+      bN.val = temp;
+      return this;
+    }
+    return null;
   }
 
   fromLast(n) {

@@ -19,7 +19,7 @@ class BinarySearchTree {
     }
     let current = this.root;
     while (true) {
-      if ((current.val = val)) return undefined;
+      if (current.val === val) return undefined;
       if (current.val < val) {
         if (!current.right) {
           current.right = node;
@@ -124,14 +124,22 @@ bst.insert(9);
 bst.insert(8);
 bst.insert(12);
 bst.insert(77);
-bst.insert(78);
-bst.insert(79);
-bst.insert(80);
-bst.insert(85);
-bst.insert(83);
-bst.insert(82);
-bst.insert(11);
+
+// bst.root.left.left = new Node(90);
+// bst.insert(78);
+// bst.insert(79);
+// bst.insert(80);
+// bst.insert(85);
+// bst.insert(83);
+// bst.insert(82);
+// bst.insert(110);
+// bst.insert(111);
+// bst.insert(112);
+// bst.insert(113);
+// bst.insert(114);
 
 // console.log(bst.bFS());
 // console.log(bst.dFSLoop());
 // console.log(bst.dFSPreOrder());
+
+module.exports = bst;

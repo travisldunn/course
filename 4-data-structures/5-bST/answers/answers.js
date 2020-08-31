@@ -46,7 +46,30 @@ function isBalanced(treeRoot) {
   return true;
 }
 
-// console.log(isBalanced(bst.root));
+function isBalanced(root) {
+  if (!root) return true;
+  const depths = [],
+    nodes = [[root, 0]];
+  while (nodes.length) {
+    const [{ left, right }, depth] = nodes.pop();
+    if (!left && !right) {
+      if (depths.indexOf(depth) < 0) {
+        depths.push(depth);
+        if (
+          depths.length > 2 ||
+          (depths.length === 2 && Math.abs(depths[0] - depths[1]))
+        ) {
+          return false;
+        }
+      }
+    } else {
+      if (left) nodes.push([left, depth + 1]);
+      if (right) nodes.push([right, depth + 1]);
+    }
+  }
+
+  return true;
+}
 
 validTree = (treeRoot) => {
   nodes = [{ node: treeRoot, uper: Infinity, lower: -Infinity }];
@@ -79,6 +102,18 @@ validTree = (treeRoot) => {
   return true;
 };
 
+validTree = (root) => {
+  const nodes = [{ node: root, lower: -Infinity, uper: Infinity }];
+  while (nodes.length) {
+    let { node, lower, uper } = nodes.pop(),
+      { left, right, val } = node;
+    if (val < lower || val > uper) return false;
+    if (left) nodes.push({ node: left, lower, uper: val });
+    if (right) nodes.push({ node: right, lower: val, uper });
+  }
+  return true;
+};
+
 largest = (treeRoot) => {
   let current = treeRoot;
 
@@ -98,6 +133,11 @@ secondLargest = (treeRoot) => {
       return current;
     current = current.right;
   }
+};
+
+secondLargest = (bst) => {
+  const ary = bst.dFSInOrder();
+  return ary.length > 1 ? ary[ary.length - 2] : false;
 };
 
 console.log(secondLargest(bst.root));

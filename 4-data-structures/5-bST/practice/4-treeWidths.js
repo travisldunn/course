@@ -29,3 +29,5 @@ function levelWidth(root) {
 
   return counters;
 }
+
+console.log(levelWidth(require("../practice").root));

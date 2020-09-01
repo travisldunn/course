@@ -140,4 +140,16 @@ secondLargest = (bst) => {
   return ary.length > 1 ? ary[ary.length - 2] : false;
 };
 
+secondLargest = (bst) => bst.dFSInOrder()[bst.dFSInOrder().length - 2];
+
+const secondLargest = (root) => {
+  let current = root;
+  while (current) {
+    let { left, right, val } = current;
+    if (!right && left) return largest(left);
+    if (right && !right.right && !right.left) return current.val;
+    current = current.right;
+  }
+};
+
 console.log(secondLargest(bst.root));

@@ -15,14 +15,15 @@ function levelWidth(root) {
   const arr = [root, "s"];
   const counters = [0];
 
-  while (arr.length > 1) {
+  while (arr.length) {
     const node = arr.shift();
 
     if (node === "s") {
       counters.push(0);
       arr.push("s");
     } else {
-      arr.push(...node.children);
+      if (node.left) arr.push(node.left);
+      if (node.right) arr.push(node.right);
       counters[counters.length - 1]++;
     }
   }
@@ -30,4 +31,4 @@ function levelWidth(root) {
   return counters;
 }
 
-console.log(levelWidth(require("../practice").root));
+console.log(levelWidth(require("../practice").r));

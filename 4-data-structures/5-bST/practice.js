@@ -19,100 +19,97 @@ class BinarySearchTree {
     }
     let current = this.root;
     while (true) {
-      if (current.val === val) return undefined;
-      if (current.val < val) {
+      if (val === current.val) return undefined;
+      if (val < current.val) {
+        if (!current.left) {
+          current.left = node;
+          return this;
+        }
+        current = current.left;
+      } else {
         if (!current.right) {
           current.right = node;
           return this;
         }
         current = current.right;
-      } else {
-        if (current.val > val) {
-          if (!current.left) {
-            current.left = node;
-            return this;
-          }
-          current = current.left;
-        }
       }
     }
-
-    return this;
   }
 
   find(val) {
     let current = this.root;
     while (current) {
       if (current.val === val) return current;
-      if (current.val > val) current = current.left;
+      if (val < current.val) current = current.left;
       else current = current.right;
     }
-    return undefined;
+    return -1;
   }
 
   contains(val) {
     let current = this.root;
     while (current) {
       if (current.val === val) return true;
-      if (current.val > val) current = current.left;
+      if (val < current.val) current = current.left;
       else current = current.right;
     }
     return false;
   }
 
   bFS() {
-    const queue = [this.root],
-      data = [];
-
+    const data = [],
+      queue = [this.root];
     while (queue.length) {
-      let node = queue.shift();
-      data.push(node.val);
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
+      let { val, left, right } = queue.shift();
+      data.push(val);
+      if (left) queue.push(left);
+      if (right) queue.push(right);
     }
     return data;
   }
 
   dFSLoop() {
-    const stack = [this.root],
-      data = [];
-
+    const data = [],
+      stack = [this.root];
     while (stack.length) {
-      let node = stack.pop();
-      data.push(node.val);
-      if (node.left) stack.push(node.left);
-      if (node.right) stack.push(node.right);
+      let { val, left, right } = stack.pop();
+      data.push(val);
+      if (left) stack.push(left);
+      if (right) stack.push(right);
     }
     return data;
   }
 
   dFSPreOrder() {
     const data = [];
-    (function traverse(node) {
-      data.push(node.val);
-      if (node.left) traverse(node.left);
-      if (node.right) traverse(node.right);
-    })(this.root);
+    const recurse = ({ val, left, right }) => {
+      data.push(val);
+      if (left) recurse(left);
+      if (right) recurse(right);
+    };
+    recurse(this.root);
     return data;
   }
 
   dFSInOrder() {
     const data = [];
-    (function traverse(node) {
-      if (node.left) traverse(node.left);
-      data.push(node.val);
-      if (node.right) traverse(node.right);
-    })(this.root);
+    const recurse = ({ val, left, right }) => {
+      if (left) recurse(left);
+      data.push(val);
+      if (right) recurse(right);
+    };
+    recurse(this.root);
     return data;
   }
 
   dFSPostOrder() {
     const data = [];
-    (function traverse(node) {
-      if (node.left) traverse(node.left);
-      if (node.right) traverse(node.right);
-      data.push(node.val);
-    })(this.root);
+    const recurse = ({ val, left, right }) => {
+      if (left) recurse(left);
+      if (right) recurse(right);
+      data.push(val);
+    };
+    recurse(this.root);
     return data;
   }
 }
@@ -141,5 +138,7 @@ bst.insert(77);
 // console.log(bst.bFS());
 // console.log(bst.dFSLoop());
 // console.log(bst.dFSPreOrder());
+console.log(bst.dFSPreOrder());
+// console.log(bst);
 
 module.exports = bst;

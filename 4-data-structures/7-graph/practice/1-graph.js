@@ -61,8 +61,9 @@ g.addEdge("Hong Kong", "Dallas");
 g.addEdge("Los Angeles", "Hong Kong");
 g.addEdge("Los Angeles", "Aspen");
 
-console.log(g.depthFirstSearchR("Aspen"));
+// console.log(g.depthFirstSearchR("Aspen"));
 
 // console.log(g.depthFirstSearchI("Aspen"));
 // console.log(g.breadthFirstSearch("Aspen"));
-console.log(g.list);
+// console.log(g.list);
+console.log((23 / 2) | 0);

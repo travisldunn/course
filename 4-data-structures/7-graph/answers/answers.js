@@ -9,6 +9,7 @@ class Graph {
   addVertex(v) {
     if (!this.list[v]) this.list[v] = [];
   }
+
   addEdge(v1, v2) {
     this.list[v1].push(v2);
     this.list[v2].push(v1);

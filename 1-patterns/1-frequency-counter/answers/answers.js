@@ -7,7 +7,7 @@ sameFrequency = (num1, num2) => {
   if (num1.length !== num2.length) return false;
   let num1Hash = {};
   let num2Hash = {};
-  for (let el of num1) {
+  for (let el of num1) { 
     num1Hash[el] = ++num1Hash[el] || 1;
   }
   for (let el of num2) {

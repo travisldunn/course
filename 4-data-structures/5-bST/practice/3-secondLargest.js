@@ -1,17 +1,15 @@
 const largest = (root) => {
   let current = root;
-  while (current) {
-    if (!current.right) return current.val;
-    current = current.right;
-  }
+  while (current.right) current = current.right;
+  return current.val;
 };
 
 const secondLargest = (root) => {
   let current = root;
-  while (current) {
+  while (true) {
     let { left, right, val } = current;
     if (!right && left) return largest(left);
-    if (right && !right.right && !right.left) return current.val;
+    if (right && !right.right && !right.left) return val;
     current = current.right;
   }
 };

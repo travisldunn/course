@@ -168,8 +168,24 @@ const secondLargest = (root) => {
   let current = root;
   while (current) {
     let { left, right, val } = current;
+    if (!right.right && !right.left) return current.val;
     if (!right && left) return largest(left);
-    if (right && !right.right && !right.left) return current.val;
+    current = current.right;
+  }
+};
+
+const largest = (root) => {
+  let current = root;
+  while (current.right) current = current.right;
+  return current.val;
+};
+
+const secondLargest = (root) => {
+  let current = root;
+  while (true) {
+    let { left, right, val } = current;
+    if (!right && left) return largest(left);
+    if (right && !right.right && !right.left) return val;
     current = current.right;
   }
 };

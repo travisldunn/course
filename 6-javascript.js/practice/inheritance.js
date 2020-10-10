@@ -16,3 +16,5 @@ class Square extends Rectangle {
 
 let square = new Square(5);
 console.log(square.area());
+
+("INHERITANCE");

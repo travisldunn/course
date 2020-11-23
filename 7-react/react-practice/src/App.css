@@ -1,0 +1,65 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  height: 40px;
+  background-color: aqua;
+}
+
+header button {
+  margin-right: 10px;
+  height: 40px;
+  background: aquamarine;
+  border: none;
+}
+
+.home {
+  width: 500px;
+  margin: 50px auto;
+}
+
+.ttt {
+  width: 200px;
+  margin: 50px auto;
+}
+
+.ttt .board {
+  display: inline-block;
+}
+
+.ttt .steps {
+  vertical-align: top;
+  margin-left: 40px;
+  display: inline-block;
+}
+
+.ttt .steps div {
+  background: lightblue;
+  border-radius: 5%;
+  margin: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.ttt button {
+  vertical-align: top;
+  width: 30px;
+  height: 30px;
+}
+
+.debounce {
+  width: 200px;
+  margin: 50px auto;
+}
+
+.refpopup {
+  width: 200px;
+  margin: 50px auto;
+}
+
+.usestate {
+  width: 200px;
+  margin: 50px auto;
+}
